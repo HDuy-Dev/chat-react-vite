@@ -1,1 +1,9 @@
-yarn  lint-stage
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Load fnm and use Node.js version specified in .nvmrc or .node-version
+eval "$(fnm env)"
+fnm use 21.1.0
+
+# Run your pre-commit tasks
+yarn  lint-staged

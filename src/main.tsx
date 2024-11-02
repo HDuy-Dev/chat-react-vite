@@ -1,8 +1,12 @@
-import { createRoot } from "react-dom/client";
-import { App } from "./app";
-import "./index.css";
+import { createRoot } from 'react-dom/client';
 
-const root = document.getElementById("root");
-if (!root) throw new Error("No root element found");
+import './index.css';
+import { App } from './app';
+import { enableMocking } from './testing/mocks';
 
-createRoot(root).render(<App />);
+const root = document.getElementById('root');
+if (!root) throw new Error('No root element found');
+
+enableMocking().then(() => {
+  createRoot(root).render(<App />);
+});
