@@ -1,11 +1,20 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import { RouteWrapper } from './routes/route-wrapper';
+
 export const createAppRouter = () =>
   createBrowserRouter([
     {
       path: '/',
       lazy: async () => {
         const { LandingRoute } = await import('./routes/landing');
-        return { Component: LandingRoute };
+        return {
+          Component: () => (
+            <RouteWrapper>
+              <LandingRoute />
+            </RouteWrapper>
+          ),
+        };
       },
     },
     {
@@ -19,5 +28,6 @@ export const createAppRouter = () =>
 
 export const AppRouter = () => {
   const router = createAppRouter();
+
   return <RouterProvider router={router} />;
 };
