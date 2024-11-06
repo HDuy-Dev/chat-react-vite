@@ -1,28 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
+const ErrorComponent = () => {
+  throw Error('heck');
+  return <p>should never render this</p>;
+};
+
 export const LandingRoute = () => {
-  const { isPending, error, data, isFetching } = useQuery({
-    queryKey: ['repoData'],
-    queryFn: async () => {
-      const response = await fetch(
-        'https://api.github.com/repos/TanStack/query',
-      );
-      return await response.json();
-    },
-  });
-
-  if (isPending) return 'Loading...';
-
-  if (error) return 'An error has occurred: ' + error.message;
-
   return (
     <div className="mt-52 flex flex-col items-center font-semibold">
       Landing Route
-      <h1>{data.full_name}</h1>
-      <p>{data.description}</p>
-      <strong>👀 {data.subscribers_count}</strong>{' '}
-      <strong>✨ {data.stargazers_count}</strong>{' '}
-      <strong>🍴 {data.forks_count}</strong>
-      <div>{isFetching ? 'Updating...' : ''}</div>
+      <ErrorComponent />
     </div>
   );
 };
